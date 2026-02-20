@@ -1,0 +1,38 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  port: 5432
+  username: postgres
+  password: <%= ENV["PG_PASSWORD"] %>
+
+
+
+development:
+  <<: *default
+  database: trivio_development
+
+test:
+  <<: *default
+  database: trivio_test
+
+
+production:
+  primary: &primary_production
+    <<: *default
+    database: trivio_production
+    username: trivio
+    password: <%= ENV["PG_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: trivio_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: trivio_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: trivio_production_cable
+    migrations_paths: db/cable_migrate

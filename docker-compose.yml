@@ -1,0 +1,60 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: trivio_development
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    ports:
+      - "5440:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    entrypoint: [ "entrypoint.dev.sh" ]
+    command: bin/rails server -b 0.0.0.0
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres:password@db:5432/trivio_development
+      RAILS_LOG_TO_STDOUT: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    entrypoint: [ "entrypoint.dev.sh" ]
+    command: tail -f /dev/null
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+    environment:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:password@db:5432/trivio_test
+      RAILS_LOG_TO_STDOUT: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres_data:
+  bundle_cache:
