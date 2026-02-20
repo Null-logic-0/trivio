@@ -1,24 +1,10 @@
-# README
+# TRIVIO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Trivio is a full-stack,stock trading/invesment application built with Ruby on Rails and Hotwire.
+Users can invest in real companies with live market data,without spending any money.
+**Trivio's** desing was inspired by [Robinhood's](https://robinhood.com/us/en/) web application.
 
-Things you may want to cover:
+All stock data is provided by [IEX's API](https://www.iexexchange.io/products/market-data-connectivity).
+The live news feed is made by [News API](https://newsapi.org/) and chart rendering was done with the help
+of [Recharts](https://recharts.github.io/?p=/en-US/)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

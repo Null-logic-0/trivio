@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17e8ee0c-5f44-4f20-bb7a-7af283527f05" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/bin/docker-dev" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entrypoint.dev.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +20,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Null-logic-0"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Null-logic-0/trivio.git",
+    "accountId": "5b4d8d7e-5820-469a-8ce0-6353ffa1c221"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Dockerfile.dev" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -348,7 +360,7 @@
       <workItem from="1769332840474" duration="448000" />
       <workItem from="1771578059479" duration="3008000" />
       <workItem from="1771581710325" duration="3107000" />
-      <workItem from="1771585095942" duration="1135000" />
+      <workItem from="1771585095942" duration="1651000" />
     </task>
     <servers />
   </component>
