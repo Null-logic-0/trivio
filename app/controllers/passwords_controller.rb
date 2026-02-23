@@ -7,7 +7,7 @@ class PasswordsController < ApplicationController
 	end
 
 	def create
-		if user = User.find_by(email_address: params[:email_address])
+		if (user = User.find_by(email_address: params[:email_address]))
 			PasswordsMailer.reset(user).deliver_later
 			redirect_to login_path, notice: "Password reset instructions sent."
 		else
@@ -19,7 +19,7 @@ class PasswordsController < ApplicationController
 
 	def edit
 	end
-	
+
 	def update
 		if @user.update(params.permit(:password, :password_confirmation))
 			@user.sessions.destroy_all
