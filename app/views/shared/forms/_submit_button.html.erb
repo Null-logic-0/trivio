@@ -1,0 +1,16 @@
+<%# Required locals:
+    # form: the form object (optional if you only need a button)
+    # text: button text
+    # extra_classes: optional additional Tailwind classes
+%>
+
+
+<% extra_classes ||= "" %>
+<% loading ||= "" %>
+
+
+<%= (form || Object.new).submit text,
+                                class: "w-full mt-2 py-3 bg-primary hover:bg-primary-dark border-none rounded-lg
+              text-white text-sm font-bold tracking-wide cursor-pointer
+              active:scale-[0.98] transition-all #{extra_classes}",
+                                data: { turbo_disable_with: "#{loading}" } %>

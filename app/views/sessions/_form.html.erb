@@ -1,0 +1,31 @@
+<%= form_with url: login_path, class: 'space-y-4' do |f| %>
+
+
+  <%= render "shared/forms/input",
+             form: f,
+             field: :login,
+             type: :text_field,
+             label: "Email / Username",
+             required: true,
+             placeholder: "Enter your email or username" %>
+
+
+
+  <%= render "shared/forms/input",
+             form: f,
+             field: :password,
+             type: :password_field,
+             label: "Password",
+             required: true,
+             placeholder: "••••••••" %>
+
+  <div class="text-end">
+    <%= link_to "Forgot your password?", forgot_password_path,
+                class: "text-primary text-xs  font-mono hover:underline" %>
+  </div>
+
+  <div>
+    <%= render "shared/forms/submit_button", form: f, text: "Log in", loading: "Logging in..." %>
+  </div>
+
+<% end %>

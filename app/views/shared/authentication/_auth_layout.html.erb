@@ -1,0 +1,21 @@
+<div class="min-h-screen grid grid-cols-1 lg:grid-cols-[50%_50%]">
+
+  <!-- LEFT SIDE -->
+  <%= render "shared/authentication/auth_brand_panel" %>
+
+  <!-- RIGHT SIDE -->
+  <div class="bg-surface flex items-center justify-center px-6 sm:px-10 lg:px-16 py-10">
+    <div class="w-full max-w-md">
+
+      <% if local_assigns[:title] %>
+        <h2 class="text-2xl sm:text-3xl text-center font-bold mb-6 sm:mb-8">
+          <%= title %>
+        </h2>
+      <% end %>
+
+      <%= yield %>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+    /* Fonts */
+    --font-syne: "Syne", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+
+    /* Colors */
+    --color-primary: #E8441A;
+    --color-primary-dark: #C03510;
+
+    --color-bg: #0A0A0F;
+    --color-surface: #111118;
+    --color-surface-2: #18181F;
+    --color-surface-3: #21212B;
+    --color-font: #F0F0F5;
+    --color-border: #2A2A35;
+    --color-muted: #6B6B7A;
+    --color-dim: #3A3A48;
+    --color-notice: #22C55E;
+    --color-alert: #EF4444;
+}
+
+
+body {
+    font-family: 'Syne', sans-serif;
+    background: var(--color-bg);
+    color: var(--color-font);
+}
+
+@keyframes tickerScroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.ticker-inner {
+    animation: tickerScroll 30s linear infinite;
+}
+
+/* Account popup entrance animation */
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.account-popup {
+    animation: popIn 0.15s ease;
+}
+
+
+@keyframes fade-in-and-out {
+    0%,
+    100% {
+        opacity: 0;
+    }
+    25%,
+    75% {
+        opacity: 1;
+    }
+}

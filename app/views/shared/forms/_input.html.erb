@@ -1,0 +1,29 @@
+<%# Required locals:
+     # form:
+     # field:
+     # type: :text_field, :email_field, :password_field, etc.
+     # label:
+     # placeholder:
+     # required: true/false (optional, default false)
+     # value: default value (optional)
+%>
+<% required ||= false %>
+<% has_error = form&.object&.errors[field].present? rescue false %>
+
+<div>
+  <%= form.label field, label,
+                 class: "block text-[0.7rem] font-semibold uppercase tracking-widest mb-1.5 #{has_error ? 'text-red-400' : 'text-muted'}" %>
+
+  <%= form.public_send(type, field,
+                       placeholder: placeholder,
+                       required: required,
+                       value: (defined?(value) ? value : nil),
+                       class: "w-full rounded-lg px-4 py-2.5 font-mono text-sm outline-none transition-colors
+      #{has_error ? 'bg-red-500/5 border border-red-500 focus:border-red-400 text-white' : 'bg-surface3 border border-border focus:border-primary text-white'} placeholder:text-muted") %>
+
+  <% if has_error %>
+    <p class="mt-1 text-xs text-alert font-mono">
+      <%= form.object.errors[field].first %>
+    </p>
+  <% end %>
+</div>

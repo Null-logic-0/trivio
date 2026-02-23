@@ -1,0 +1,43 @@
+<%= form_with model: @user, url: signup_path, class: 'space-y-4' do |f| %>
+
+  <div class="grid grid-cols-2 gap-4">
+    <%= render "shared/forms/input",
+               form: f,
+               field: :first_name,
+               type: :text_field,
+               label: "First Name",
+               placeholder: "John" %>
+
+    <%= render "shared/forms/input",
+               form: f,
+               field: :last_name,
+               type: :text_field,
+               label: "Last Name",
+               placeholder: "Doe" %>
+  </div>
+  <%= render "shared/forms/input",
+             form: f,
+             field: :username,
+             type: :text_field,
+             label: "Username",
+             placeholder: "username" %>
+
+  <%= render "shared/forms/input",
+             form: f,
+             field: :email_address,
+             type: :email_field,
+             label: "Email Address",
+             placeholder: "john@example.com" %>
+
+  <%= render "shared/forms/input",
+             form: f,
+             field: :password,
+             type: :password_field,
+             label: "Password",
+             placeholder: "••••••••" %>
+
+  <div>
+    <%= render "shared/forms/submit_button", form: f, text: "Sign up", loading: "Signing up..." %>
+  </div>
+
+<% end %>

@@ -1,0 +1,12 @@
+<% content_for :title, "TRIVIO | Login" %>
+
+<%= render "shared/authentication/auth_layout", title: "Welcome back" do %>
+  <%= render "form" %>
+
+  <%= render "shared/authentication/auth_switch_link",
+             text: "Don't have an account?",
+             link_text: "Register →",
+             path: signup_path
+  %>
+
+<% end %>
