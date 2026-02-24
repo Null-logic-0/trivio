@@ -14,11 +14,11 @@ class TradesController < ApplicationController
 			                          stock: stock,
 			                          shares: shares)
 			Current.user.update!(buying_power: Current.user.buying_power - shares * price)
-			flash.now[:notice] = "Bought #{shares} shares of #{stock.symbol}"
+			redirect_to root_path, notice: "Bought #{shares} shares of #{stock.symbol}"
 		else
-			flash.now[:alert] = "Not enough buying power!"
+			redirect_to stocks_path, alert: "Not enough buying power!"
 		end
-		respond(format: :html)
+
 	end
 
 	def sell
@@ -56,15 +56,10 @@ class TradesController < ApplicationController
 		Current.user.update!(buying_power: Current.user.buying_power + shares_to_sell * price)
 
 		flash.now[:notice] = "Sold #{shares_to_sell} shares of #{stock.symbol}"
-		respond(format: :html)
-	end
-
-	private
-
-	def respond(format: :html)
 		respond_to do |f|
 			f.turbo_stream { render turbo_stream: turbo_stream.append("flash_messages", partial: "layouts/flash") }
 			f.html { redirect_to root_path }
 		end
 	end
+
 end
