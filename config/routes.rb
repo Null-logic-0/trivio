@@ -15,7 +15,9 @@ Rails.application.routes.draw do
 	resources :passwords, param: :token, only: [:new, :create, :edit, :update]
 
 	# Trading
-	resources :trades, only: [:create]
+	resources :trades, only: [:create] do
+		post :sell, on: :collection
+	end
 
 	# Watchlist
 	resources :watchlists, only: [:create, :destroy]

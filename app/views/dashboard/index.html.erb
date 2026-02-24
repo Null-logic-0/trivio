@@ -15,6 +15,13 @@
     <% @holdings.each do |h| %>
       <li>
         <%= h.stock.symbol %> - <%= h.shares %> shares
+
+        <%# Sell form %>
+        <%= form_with url: sell_trades_path, method: :post, data: { turbo_frame: "portfolio_value" }, local: true do |f| %>
+          <%= hidden_field_tag :symbol, h.stock.symbol %>
+          <%= number_field_tag :shares, 1, min: 1, max: h.shares %>
+          <%= submit_tag "Sell" %>
+        <% end %>
       </li>
     <% end %>
   </ul>
