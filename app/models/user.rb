@@ -1,6 +1,11 @@
 class User < ApplicationRecord
 	has_secure_password
 	has_many :sessions, dependent: :destroy
+	has_many :holdings, dependent: :destroy
+	has_many :trades, dependent: :destroy
+
+	has_many :watchlist_items, class_name: "Watchlist", dependent: :destroy
+	has_many :watchlist, through: :watchlist_items, source: :stock
 
 	normalizes :email_address, with: ->(e) { e.strip.downcase }
 	normalizes :first_name, with: ->(e) { e.strip.capitalize }

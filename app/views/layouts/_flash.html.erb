@@ -1,10 +1,5 @@
-<%# if flash %>
-<%# flash.each do |type, message| %>
-<%#= content_tag(:div, message, class: "flash #{type}", data: { controller: "flash" }) %>
-<%# end %>
-<%# end %>
-
-<div class="fixed top-5 right-5 z-50 flex flex-col gap-3 pointer-events-none max-w-sm w-full px-4 sm:px-0">
+<div
+  class="fixed top-5 right-5 z-50 flex flex-col gap-3 pointer-events-none max-w-sm w-full px-4 sm:px-0">
   <% flash.each do |type, message| %>
     <%
       bg_class = case type.to_sym
@@ -14,7 +9,9 @@
                  end
     %>
 
-    <div class="pointer-events-auto flex items-start p-4 border rounded-xl shadow-lg <%= bg_class %> transition-all duration-500 ease-out translate-x-0 opacity-100" data-controller="flash">
+    <div
+      data-controller="flash"
+      class="pointer-events-auto flex items-start p-4 border rounded-xl shadow-lg <%= bg_class %> transition-all duration-500 ease-out translate-x-0 opacity-100">
       <div class="flex-1 font-medium text-sm">
         <%= message %>
       </div>

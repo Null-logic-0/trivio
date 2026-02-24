@@ -1,0 +1,14 @@
+<div data-controller="chart"
+     data-chart-url-value="<%= history_stock_path(@stock) %>"
+     data-chart-interval-value="5000">
+
+  <div data-chart-target="chart" id="live-price-chart">
+    <%= line_chart history_stock_path(@stock),
+                   refresh: 5,
+                   xtitle: "Time",
+                   ytitle: "Price (USD)",
+                   prefix: "$"
+    %>
+  </div>
+
+</div>

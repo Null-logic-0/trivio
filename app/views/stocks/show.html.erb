@@ -1,0 +1,11 @@
+<h1><%= @stock.symbol %></h1>
+<p>Current Price: $<%= @quote["c"] %></p>
+<p>Market Cap: <%= @profile["marketCapitalization"] %></p>
+
+<%= render partial: "stock_chart" %>
+
+<%= form_with url: trades_path, local: true do %>
+  <%= hidden_field_tag :symbol, @stock.symbol %>
+  <%= number_field_tag :shares, 1, min: 1 %>
+  <%= submit_tag "Buy" %>
+<% end %>

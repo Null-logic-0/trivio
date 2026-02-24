@@ -1,0 +1,11 @@
+:concurrency: 5
+:queues:
+  - default
+  - stock_updates
+  - mailers
+
+:schedule:
+  update_stock_prices:
+    cron: "*/1 * * * *"    # every minute
+    class: "UpdateStockPricesJob"
+    queue: stock_updates

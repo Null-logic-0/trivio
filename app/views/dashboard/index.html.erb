@@ -1,4 +1,46 @@
 <h1>Dashboard</h1>
-<p>Welcome back , <%= @user.first_name %></p>
+<p>Welcome back , <%= Current.user&.username %></p>
+<p>Buying power: $<%= Current.user&.buying_power %></p>
 
 <%= button_to "logout", logout_path, method: :delete %>
+
+
+<h2>Portfolio History</h2>
+
+<%= render partial: "dashboard/portfolio_chart", locals: { portfolio_history: @portfolio_history } %>
+
+<%= turbo_frame_tag "portfolio_value" do %>
+  <h2>Portfolio</h2>
+  <ul>
+    <% @holdings.each do |h| %>
+      <li>
+        <%= h.stock.symbol %> - <%= h.shares %> shares
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= turbo_frame_tag "top_movers" do %>
+  <h2>Top Movers</h2>
+  <ul>
+    <% @top_movers.each do |symbol| %>
+      <li><%= symbol %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2>Watchlist</h2>
+<ul id="watchlist">
+  <% Current.user.watchlist_items.each do |item| %>
+    <li id="watchlist-item-<%= item.id %>">
+      <%= item.stock.symbol %> - $<%= item.stock.current_price %>
+
+      <%= button_to "Remove",
+                    watchlist_path(item.id),
+                    method: :delete,
+                    data: { turbo_stream: true },
+                    form_class: "inline" %>
+    </li>
+  <% end %>
+</ul>
+

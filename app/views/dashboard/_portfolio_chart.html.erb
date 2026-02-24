@@ -1,0 +1,13 @@
+<div data-controller="chart"
+     data-portfolio-chart-url-value="<%= portfolio_history_path(format: :json) %>"
+     data-portfolio-chart-interval-value="10000"
+     data-chart-target="chart">
+  <div id="chart">
+    <%= area_chart portfolio_history_path(format: :json),
+                   refresh: 10,
+                   xtitle: "Date",
+                   ytitle: "Portfolio Value (USD)",
+                   prefix: "$",
+                   thousands: "," %>
+  </div>
+</div>
