@@ -1,4 +1,4 @@
-<h1>Market Stocks</h1>
+<h1>Market Stocks <%= @stocks.length %></h1>
 
 <div data-controller="stocks"
      data-stocks-url-value="<%= stocks_path(format: :json) %>"

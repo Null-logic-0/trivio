@@ -16,20 +16,26 @@ class StockDataService
 	end
 
 	def top_movers
-		symbols = %w[AAPL TSLA AMZN NVDA MSFT]
+		stocks = Stock.limit(50)
 
-		symbols.map do |symbol|
-			data = self.class.get('/quote', query: { symbol: symbol, token: @api_key }).parsed_response
+		stocks.map do |stock|
+			data = self.class.get("/quote", query: {
+				symbol: stock.symbol,
+				token: @api_key
+			}).parsed_response
 
-			next unless data["c"]
+			next unless data["c"] && data["dp"]
 
 			{
-				symbol: symbol,
+				symbol: stock.symbol,
 				price: data["c"],
 				change: data["d"],
 				percent_change: data["dp"]
 			}
-		end.compact.sort_by { |stock| -stock[:percent_change].to_f }
+		end
+		      .compact
+		      .sort_by { |s| -s[:percent_change].to_f }
+		      .first(10)
 	end
 
 	def current_price

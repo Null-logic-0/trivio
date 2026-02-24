@@ -1,6 +1,7 @@
 class StocksController < ApplicationController
 	def index
 		@stocks = Stock.all.order(:symbol)
+		UpdateStockPricesJob.perform_later
 
 		respond_to do |format|
 			format.html
