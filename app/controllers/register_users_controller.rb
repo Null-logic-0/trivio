@@ -1,5 +1,6 @@
 class RegisterUsersController < ApplicationController
 	allow_unauthenticated_access
+	before_action :redirect_if_authenticated, only: %i[ new create ]
 
 	def new
 		@user = User.new

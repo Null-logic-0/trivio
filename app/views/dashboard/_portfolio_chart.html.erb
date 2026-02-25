@@ -1,13 +1,44 @@
-<div data-controller="chart"
-     data-portfolio-chart-url-value="<%= portfolio_history_path(format: :json) %>"
-     data-portfolio-chart-interval-value="10000"
-     data-chart-target="chart">
-  <div id="chart">
-    <%= area_chart portfolio_history_path(format: :json),
-                   refresh: 10,
-                   xtitle: "Date",
-                   ytitle: "Portfolio Value (USD)",
-                   prefix: "$",
-                   thousands: "," %>
+<div class="bg-surface rounded-xl p-6 border border-white/5 shadow-2xl">
+
+  <div class="mb-4">
+    <p class="text-[11px] font-semibold tracking-widest text-white/40 uppercase mb-1">Portfolio Value</p>
+    <p class="text-4xl font-bold text-white tracking-tight"><%= number_to_currency(@portfolio_value) %></p>
+    <% daily_change = @daily_change.to_f %>
+    <% positive = daily_change >= 0 %>
+
+    <p class="text-sm mt-1 flex items-center gap-1 <%= positive ? 'text-emerald-400' : 'text-red-400' %>">
+      <span><%= positive ? '▲' : '▼' %></span>
+      <span class="font-semibold"><%= number_to_currency(daily_change.abs) %></span>
+      <span class="text-white/40"><%= positive ? '+' : '-' %><%= @daily_change_percent.to_f.abs %>% today</span>
+    </p>
+  </div>
+
+  <!-- Chart -->
+  <div data-controller="chart"
+       data-portfolio-chart-url-value="<%= portfolio_history_path(format: :json) %>"
+       data-portfolio-chart-interval-value="10000"
+       data-chart-target="chart">
+    <div id="chart">
+      <%= render "shared/chart",
+                 chart_type: :line_chart,
+                 url: portfolio_history_path(format: :json),
+                 color: "#22c55e",
+                 bg_color: "#111318",
+                 prefix: "$",
+                 thousands: ",",
+                 refresh: 10,
+                 fill: false %>
+    </div>
+  </div>
+
+  <!-- Time range tabs -->
+  <div class="flex gap-1 mt-4">
+    <% [%w[1D 1d], %w[1W 1w], %w[1M 1m], %w[3M 3m], %w[1Y 1y], %w[ALL all]].each do |label, value| %>
+      <button
+        data-range="<%= value %>"
+        class="range-btn <%= @range == value ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'text-white/30 hover:text-white/60 border-transparent' %> text-xs font-semibold px-3 py-1.5 rounded border transition-all duration-200">
+        <%= label %>
+      </button>
+    <% end %>
   </div>
 </div>

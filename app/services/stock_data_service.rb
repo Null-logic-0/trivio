@@ -16,7 +16,7 @@ class StockDataService
 	end
 
 	def top_movers
-		stocks = Stock.limit(50)
+		stocks = Stock.limit(10)
 
 		stocks.map do |stock|
 			data = self.class.get("/quote", query: {
@@ -45,5 +45,12 @@ class StockDataService
 		}).parsed_response
 
 		response["c"] # current price
+	end
+
+	def news
+		self.class.get("/news", query: {
+			symbol: "general",
+			token: @api_key
+		}).parsed_response
 	end
 end

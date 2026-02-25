@@ -1,0 +1,14 @@
+<div class="bg-surface rounded-xl border border-white/5 shadow-2xl px-6 py-5 flex items-center justify-between">
+
+  <div>
+    <p class="text-[11px] font-semibold tracking-widest text-white/40 uppercase">Welcome back</p>
+    <p class="text-white font-bold"><%= Current.user.first_name %> <%= Current.user.last_name %></p>
+  </div>
+
+
+  <div class="text-right">
+    <p class="text-[11px] font-semibold tracking-widest text-white/40 uppercase">Buying Power</p>
+    <p class="text-emerald-400 font-bold text-lg"><%= number_to_currency(Current.user.buying_power) %></p>
+  </div>
+
+</div>

@@ -29,6 +29,5 @@ Rails.application.routes.draw do
 
 	root "dashboard#index"
 	get "dashboard/portfolio_history", to: "dashboard#portfolio_history_json", as: :portfolio_history
-	get "dashboard/top_movers", to: "dashboard#top_movers_json", as: :top_movers
 	get "dashboard/holdings", to: "dashboard#holdings_json", as: :holdings
 end

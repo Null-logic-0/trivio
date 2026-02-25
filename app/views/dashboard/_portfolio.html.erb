@@ -1,0 +1,36 @@
+<%= turbo_frame_tag "portfolio_value" do %>
+
+  <%= render "shared/card",
+             title: "Holdings",
+             subtitle: "#{@holdings.count} Positions",
+             card_class: "",
+             content_class: "",
+             icon: "↗" do %>
+
+    <ul class="divide-y divide-white/5">
+      <% @holdings.each do |h| %>
+        <li class="px-6 py-4 flex items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors duration-150">
+
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+              <span class="text-emerald-400 text-xs font-bold"><%= h.stock.symbol.first(2) %></span>
+            </div>
+            <div class="min-w-0">
+              <p class="text-white font-semibold text-sm"><%= h.stock.symbol %></p>
+              <p class="text-white/40 text-xs"><%= h.shares %> shares</p>
+            </div>
+          </div>
+
+          <!-- Sell form -->
+          <%= render "form", holding: h %>
+
+        </li>
+      <% end %>
+    </ul>
+
+    <% if @holdings.empty? %>
+      <%= render "shared/empty_state", message: "No holdings yet" %>
+    <% end %>
+
+  <% end %>
+<% end %>

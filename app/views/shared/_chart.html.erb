@@ -1,0 +1,46 @@
+<%= send(chart_type, url,
+         refresh: refresh,
+         prefix: prefix,
+         thousands: thousands,
+         colors: [color],
+         dataset: {
+           borderColor: color,
+           borderWidth: 2,
+           pointRadius: 3,
+           pointBackgroundColor: color,
+           pointBorderColor: bg_color,
+           pointBorderWidth: 2,
+           pointHoverRadius: 6,
+           fill: fill,
+           tension: 0.4
+         },
+         library: {
+           animation: { duration: 600, easing: "easeInOutQuart" },
+           layout: { padding: { top: 8, bottom: 0 } },
+           plugins: {
+             legend: { display: false },
+             tooltip: {
+               backgroundColor: bg_color,
+               borderColor: "rgba(255,255,255,0.08)",
+               borderWidth: 1,
+               titleColor: "rgba(255,255,255,0.4)",
+               bodyColor: color,
+               bodyFont: { weight: "bold", size: 14 },
+               padding: 12,
+               displayColors: false
+             }
+           },
+           scales: {
+             x: {
+               grid: { color: "rgba(255,255,255,0.04)", drawBorder: false },
+               ticks: { color: "rgba(255,255,255,0.3)", font: { size: 11 }, maxRotation: 0 },
+               border: { display: false }
+             },
+             y: {
+               position: "left",
+               grid: { color: "rgba(255,255,255,0.04)", drawBorder: false },
+               ticks: { color: "rgba(255,255,255,0.3)", font: { size: 11 } },
+               border: { display: false }
+             }
+           }
+         }) %>

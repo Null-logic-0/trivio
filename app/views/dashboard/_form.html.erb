@@ -1,0 +1,12 @@
+<%= form_with url: sell_trades_path, method: :post,
+              data: { turbo_frame: "portfolio_value" },
+              class: "flex items-center gap-2 flex-shrink-0" do |_| %>
+  <%= hidden_field_tag :symbol, holding.stock.symbol %>
+  <%= number_field_tag :shares, 1, min: 1, max: holding.shares,
+                       class: "w-16 bg-white/5 border border-white/10 text-white text-xs text-center rounded-lg px-2 py-1.5
+                        focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20
+                        [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" %>
+  <%= submit_tag "Sell",
+                 class: "bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 hover:border-red-500/40
+                        text-xs font-semibold px-3 py-1.5 rounded-lg cursor-pointer transition-all duration-200" %>
+<% end %>

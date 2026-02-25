@@ -19,6 +19,7 @@
     --color-dim: #3A3A48;
     --color-notice: #22C55E;
     --color-alert: #EF4444;
+    --color-alert-dark: #C53030;
 }
 
 
@@ -38,4 +39,30 @@ body {
     75% {
         opacity: 1;
     }
+}
+
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+    animation: marquee 25s linear infinite;
+}
+
+#nav-toggle:checked ~ label span:nth-child(1) {
+    transform: rotate(45deg) translateY(10px);
+}
+
+#nav-toggle:checked ~ label span:nth-child(2) {
+    opacity: 0;
+}
+
+#nav-toggle:checked ~ label span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-10px);
 }
