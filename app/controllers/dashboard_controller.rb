@@ -1,20 +1,4 @@
 class DashboardController < ApplicationController
-	# def index
-	# 	@user = Current.user
-	# 	@holdings = @user.holdings.includes(:stock)
-	# 	@portfolio_history = @user.trades.group_by_day(:created_at)
-	# 	                          .sum("shares * price").transform_keys(&:to_s)
-	#
-	# 	# Calculate portfolio stats from history
-	# 	values = @portfolio_history.values
-	# 	@portfolio_value = values.sum
-	# 	today_value = values.last.to_f
-	# 	yesterday_value = values[-2].to_f
-	#
-	# 	@daily_change = today_value - yesterday_value
-	# 	@daily_change_percent = yesterday_value > 0 ? ((@daily_change / yesterday_value) * 100).round(2) : 0.0
-	# end
-
 	def index
 		@user = Current.user
 		@holdings = @user.holdings.includes(:stock)

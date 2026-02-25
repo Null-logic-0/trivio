@@ -66,3 +66,34 @@ body {
 #nav-toggle:checked ~ label span:nth-child(3) {
     transform: rotate(-45deg) translateY(-10px);
 }
+
+/* PAGY NAVIGATION */
+.pagy {
+    @apply flex items-center justify-center gap-2 mt-8 font-syne;
+}
+
+.pagy a {
+    @apply px-3 py-1.5 rounded-md text-sm transition-all duration-200;
+    background-color: var(--color-surface-3);
+    color: var(--color-font);
+}
+
+.pagy a:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.pagy .current {
+    @apply px-3 py-1.5 rounded-md text-sm font-semibold;
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.pagy .gap {
+    @apply px-2 text-sm;
+    color: var(--color-muted);
+}
+
+.pagy a[aria-disabled="true"] {
+    @apply pointer-events-none opacity-40;
+}
