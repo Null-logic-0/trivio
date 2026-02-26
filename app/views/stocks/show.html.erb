@@ -46,14 +46,14 @@
                  card_class: "",
                  content_class: "p-4 flex justify-center" do %>
 
-        <%= form_with url: trades_path, local: true, class: "flex items-center gap-4" do %>
+        <%= form_with url: trades_path, class: "flex items-center gap-4" do %>
           <%= hidden_field_tag :symbol, @stock.symbol %>
 
           <%= number_field_tag :shares, 1, min: 1,
                                class: "w-20 px-3 py-2 rounded-lg bg-surface-3 border border-border font-mono text-font focus:outline-none focus:ring-2 focus:ring-primary" %>
 
           <%= submit_tag "Buy",
-                         class: "px-6 py-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold transition duration-200" %>
+                         class: "px-6 py-2 cursor-pointer rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold transition duration-200" %>
         <% end %>
 
       <% end %>

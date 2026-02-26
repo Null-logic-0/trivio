@@ -1,0 +1,21 @@
+<li id="watchlist-item-<%= item.id %>"
+    class="px-6 py-4 flex items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors duration-150">
+
+  <div class="flex items-center gap-3 min-w-0">
+    <div class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+      <span class="text-emerald-400 text-xs font-bold"><%= item.stock.symbol.first(2) %></span>
+    </div>
+    <div class="min-w-0">
+      <p class="text-white font-semibold text-sm"><%= item.stock.symbol %></p>
+      <p class="text-white/40 text-xs"><%= number_to_currency(item.stock.current_price) %></p>
+    </div>
+  </div>
+
+  <%= button_to "Remove",
+                watchlist_path(item.id),
+                method: :delete,
+                form_class: "flex-shrink-0",
+                class: "bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 hover:border-red-500/40
+                              text-xs font-semibold px-3 py-1.5 rounded-lg cursor-pointer transition-all duration-200" %>
+
+</li>

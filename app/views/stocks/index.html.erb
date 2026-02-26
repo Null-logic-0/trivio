@@ -58,7 +58,7 @@
 
           <!-- Buy -->
           <td class="px-6 py-4">
-            <%= form_with url: trades_path, local: true, class: "flex items-center gap-2" do %>
+            <%= form_with url: trades_path, class: "flex items-center gap-2" do %>
               <%= hidden_field_tag :symbol, stock.symbol %>
 
               <%= number_field_tag :shares, 1, min: 1,

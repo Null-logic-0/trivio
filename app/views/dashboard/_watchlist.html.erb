@@ -1,37 +1,17 @@
 <%= render "shared/card",
            title: "Watchlist",
-           subtitle: "#{Current.user.watchlist_items.count} Stocks",
+           subtitle: "<span id='watchlist_count'>#{Current.user.watchlist_items.count || 0}</span> Stocks".html_safe,
            icon: "★",
            card_class: "",
            content_class: "" do %>
-  <ul id="watchlist" class="divide-y divide-white/5">
+  <ul class="divide-y divide-white/5">
     <% Current.user.watchlist_items.each do |item| %>
-      <li id="watchlist-item-<%= item.id %>"
-          class="px-6 py-4 flex items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors duration-150">
-
-        <div class="flex items-center gap-3 min-w-0">
-          <div class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
-            <span class="text-emerald-400 text-xs font-bold"><%= item.stock.symbol.first(2) %></span>
-          </div>
-          <div class="min-w-0">
-            <p class="text-white font-semibold text-sm"><%= item.stock.symbol %></p>
-            <p class="text-white/40 text-xs"><%= number_to_currency(item.stock.current_price) %></p>
-          </div>
-        </div>
-
-        <%= button_to "Remove",
-                      watchlist_path(item.id),
-                      method: :delete,
-                      data: { turbo_stream: true },
-                      form_class: "flex-shrink-0",
-                      class: "bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 hover:border-red-500/40
-                              text-xs font-semibold px-3 py-1.5 rounded-lg cursor-pointer transition-all duration-200" %>
-
-      </li>
+      <%= render "dashboard/watchlist_item", item: item %>
     <% end %>
   </ul>
 
-  <% if Current.user.watchlist_items.empty? %>
+
+  <div id="watchlist_empty" class="transition-opacity duration-200 <%= Current.user.watchlist_items.empty? ? 'opacity-100' : 'opacity-0' %>">
     <%= render "shared/empty_state", message: "No stocks watched yet" %>
-  <% end %>
+  </div>
 <% end %>
