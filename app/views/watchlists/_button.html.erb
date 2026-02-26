@@ -1,0 +1,15 @@
+<% watchlist_item = Current.user.watchlist_items.find_by(stock: stock) %>
+
+<% if watchlist_item %>
+  <%= button_to "Remove",
+                watchlist_path(watchlist_item.id),
+                method: :delete,
+                form_class: "inline",
+                class: "px-4 py-2 cursor-pointer rounded-lg text-sm bg-primary hover:bg-primary-dark text-white transition" %>
+<% else %>
+  <%= button_to "Add",
+                watchlists_path(symbol: stock.symbol),
+                method: :post,
+                form_class: "inline",
+                class: "px-4 py-2 cursor-pointer rounded-lg text-sm bg-primary hover:bg-primary-dark text-white transition" %>
+<% end %>

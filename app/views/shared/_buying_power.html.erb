@@ -1,4 +1,8 @@
-<div id="buying_power" class="text-right">
-  <p class="text-[11px] font-semibold tracking-widest text-white/40 uppercase">Buying Power</p>
-  <p class="text-emerald-400 font-bold text-lg"><%= number_to_currency(Current.user.buying_power) %></p>
-</div>
+<%= turbo_frame_tag "buying_power" do %>
+  <div class="text-right">
+    <p class="text-[11px] font-semibold tracking-widest text-white/40 uppercase">Buying Power</p>
+    <p class="text-emerald-400 font-bold text-lg">
+      <%= number_to_currency(Current.user.reload.buying_power) %>
+    </p>
+  </div>
+<% end %>

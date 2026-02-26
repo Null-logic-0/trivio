@@ -97,8 +97,9 @@ class TradesController < ApplicationController
 			turbo_empty = turbo_stream.replace("portfolio_empty", "")
 
 		end
+		Current.user.increment!(:buying_power, total_value)
+		Current.user.reload
 
-		Current.user.update!(buying_power: Current.user.buying_power + total_value)
 		flash.now[:notice] = "Sold #{shares_to_sell} shares of #{stock.symbol}"
 
 		@holdings = Current.user.holdings.includes(:stock)

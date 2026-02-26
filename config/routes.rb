@@ -34,4 +34,6 @@ Rails.application.routes.draw do
 	# Market news
 	get "/news", to: "market_news#index", as: :news
 
+	# Update buying power
+	post '/buying_power/reset', to: 'buying_power#reset'
 end

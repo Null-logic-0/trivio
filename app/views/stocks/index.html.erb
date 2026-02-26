@@ -40,20 +40,8 @@
           </td>
 
           <!-- Watchlist -->
-          <td class="px-6 py-4">
-            <% if Current.user.watchlist_items.exists?(stock: stock) %>
-              <%= button_to "Remove",
-                            watchlists_path(stock.symbol),
-                            method: :delete,
-                            form_class: "inline",
-                            class: "px-4 py-2 cursor-pointer rounded-lg text-sm bg-alert hover:bg-alert-dark text-white transition" %>
-            <% else %>
-              <%= button_to "Add",
-                            watchlists_path(symbol: stock.symbol),
-                            method: :post,
-                            form_class: "inline",
-                            class: "px-4 py-2 cursor-pointer rounded-lg text-sm bg-primary hover:bg-primary-dark text-white transition" %>
-            <% end %>
+          <td class="px-6 py-4" id="watchlist-<%= stock.id %>">
+            <%= render "watchlists/button", stock: stock %>
           </td>
 
           <!-- Buy -->

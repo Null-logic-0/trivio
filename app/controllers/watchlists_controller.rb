@@ -11,6 +11,7 @@ class WatchlistsController < ApplicationController
 		@watchlist = Current.user.watchlist.includes(:watchlist_items)
 
 		if watchlist_item
+			stock = watchlist_item.stock
 			watchlist_item.destroy
 			flash[:notice] = "Stock removed from watchlist."
 
@@ -20,6 +21,8 @@ class WatchlistsController < ApplicationController
 						turbo_stream.remove("watchlist-item-#{watchlist_item.id}"),
 
 						turbo_stream.replace("watchlist_count", @watchlist.count),
+
+						turbo_stream.update("watchlist-#{stock.id}", partial: "watchlists/button", locals: { stock: stock }),
 
 						turbo_stream.append("flash", partial: "shared/flash"),
 						turbo_stream.replace(
