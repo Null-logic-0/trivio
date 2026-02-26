@@ -1,6 +1,6 @@
 class StocksController < ApplicationController
 	def index
-		@stocks = Stock.all.order(:symbol)
+		@pagy, @stocks = pagy(Stock.all.order(:symbol), limit: 10)
 		UpdateStockPricesJob.perform_later
 
 		respond_to do |format|

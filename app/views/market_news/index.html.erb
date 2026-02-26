@@ -40,7 +40,8 @@
 </div>
 
 <!-- Pagination -->
-<div class="mt-12">
-  <%== @pagy.series_nav %>
-</div>
-
+<% if @pagy.next %>
+  <div class="mt-12">
+    <%== @pagy.series_nav %>
+  </div>
+<% end %>
