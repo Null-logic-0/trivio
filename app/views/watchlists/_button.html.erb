@@ -9,6 +9,7 @@
 <% else %>
   <%= button_to "Add",
                 watchlists_path(symbol: stock.symbol),
+                data: { turbo: false },
                 method: :post,
                 form_class: "inline",
                 class: "px-4 py-2 cursor-pointer rounded-lg text-sm bg-primary hover:bg-primary-dark text-white transition" %>

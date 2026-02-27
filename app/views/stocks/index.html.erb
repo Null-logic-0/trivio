@@ -1,69 +1,28 @@
 <h1 class="text-3xl font-bold  text-font">
   Market Stocks
 </h1>
-<p class="text-lg  mb-6 text-font">Available Stocks: <span class="text-primary"><%= @stocks.length %></span>
+<p class="text-lg  mb-6 text-font">
+  Available Stocks:
+  <span class="text-primary"><%= @stocks.length %></span>
 </p>
 
-<div class="py-6"
-     data-controller="stocks"
-     data-stocks-url-value="<%= stocks_path(format: :json) %>"
-     data-stocks-interval-value="10000">
 
-  <div class="overflow-scroll rounded-2xl border-border  bg-surface shadow-lg">
+<%= turbo_frame_tag "stocks_table",
+                    src: table_partial_stocks_path,
+                    data: {
+                      controller: "stocks",
+                      stocks_url_value: stocks_path(format: :json),
+                      stocks_interval_value: 10000
+                    } do %>
 
-    <table class="w-full text-left">
-      <thead class="bg-surface-2 text-muted uppercase text-xs tracking-wider">
-      <tr>
-        <th class="px-6 py-4">Symbol</th>
-        <th class="px-6 py-4">Name</th>
-        <th class="px-6 py-4">Price</th>
-        <th class="px-6 py-4">Watchlist</th>
-        <th class="px-6 py-4">Buy</th>
-      </tr>
-      </thead>
-
-      <tbody class="divide-y divide-border">
-      <% @stocks.each do |stock| %>
-        <tr class="hover:bg-surface-2 transition duration-200">
-
-          <td class="px-6 py-4 font-semibold text-[var(--color-primary)]">
-            <%= link_to stock.symbol, stock_path(stock.id),
-                        class: "hover:text-primary-dark hover:underline transition" %>
-          </td>
-
-          <td class="px-6 py-4 text-[var(--color-font)]">
-            <%= stock.name %>
-          </td>
-
-          <td class="px-6 py-4 font-mono text-notice">
-            $<%= stock.current_price || "N/A" %>
-          </td>
-
-          <!-- Watchlist -->
-          <td class="px-6 py-4" id="watchlist-<%= stock.id %>">
-            <%= render "watchlists/button", stock: stock %>
-          </td>
-
-          <!-- Buy -->
-          <td class="px-6 py-4">
-            <%= form_with url: trades_path, class: "flex items-center gap-2" do %>
-              <%= hidden_field_tag :symbol, stock.symbol %>
-
-              <%= number_field_tag :shares, 1, min: 1,
-                                   class: "w-16 px-2 py-1 rounded-md bg-surface-3 border border-border text-font font-mono focus:outline-none focus:ring-2 focus:ring-primary" %>
-
-              <%= submit_tag "Buy",
-                             class: "px-4 py-2 rounded-lg cursor-pointer text-sm bg-green-800 hover:bg-green-900 text-white transition" %>
-            <% end %>
-          </td>
-
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-
+  <div class="animate-pulse p-6" id="stocks-skeleton">
+    <div class="h-6 bg-surface-2 rounded w-1/4 mb-4"></div>
+    <% 5.times do %>
+      <div class="h-6 bg-surface-3 rounded w-full mb-2"></div>
+    <% end %>
   </div>
-</div>
+
+<% end %>
 
 <!-- Pagination -->
 <% if @pagy.next %>

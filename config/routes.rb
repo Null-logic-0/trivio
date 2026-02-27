@@ -28,8 +28,16 @@ Rails.application.routes.draw do
 
 	# Stocks
 	resources :stocks, only: [:index, :show] do
-		get :history, on: :member, defaults: { format: :json }
+		collection do
+			get :table_partial
+		end
+		member do
+			get :stock_data
+			get :history, defaults: { format: :json }
+		end
 	end
+
+	resource :top_movers, only: :show
 
 	# Market news
 	get "/news", to: "market_news#index", as: :news

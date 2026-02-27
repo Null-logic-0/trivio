@@ -1,0 +1,59 @@
+<%= turbo_frame_tag "stock_data" do %>
+
+  <div class="grid lg:grid-cols-[20%_80%] grid-cols-1 gap-6">
+
+    <div class="space-y-6">
+
+      <%= render "shared/card",
+                 title: "Market Cap",
+                 subtitle: "",
+                 icon: "🏪",
+                 card_class: "",
+                 content_class: "p-4" do %>
+        <p class="text-xl font-semibold">
+          <%= number_to_human(@profile["marketCapitalization"]) %>
+        </p>
+      <% end %>
+
+      <div class="flex gap-6 lg:flex-col items-center">
+
+
+        <%= render "shared/card",
+                   title: "Current Price",
+                   subtitle: "",
+                   icon: "💲",
+                   card_class: "",
+                   content_class: "p-4" do %>
+          <p class="text-3xl font-mono font-semibold">
+            $<%= @quote["c"] %>
+          </p>
+        <% end %>
+
+
+        <%= render "shared/card",
+                   title: "Buy #{@stock.symbol} ",
+                   subtitle: "",
+                   icon: "💲",
+                   card_class: "",
+                   content_class: "p-4 flex justify-center" do %>
+
+          <%= form_with url: trades_path, class: "flex items-center gap-4" do %>
+            <%= hidden_field_tag :symbol, @stock.symbol %>
+
+            <%= number_field_tag :shares, 1, min: 1,
+                                 class: "w-20 px-3 py-2 rounded-lg bg-surface-3 border border-border font-mono text-font focus:outline-none focus:ring-2 focus:ring-primary" %>
+
+            <%= submit_tag "Buy",
+                           class: "px-6 py-2 cursor-pointer rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold transition duration-200" %>
+          <% end %>
+
+        <% end %>
+      </div>
+    </div>
+
+    <%= render partial: "stock_chart" %>
+
+
+  </div>
+
+<% end %>

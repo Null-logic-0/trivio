@@ -1,0 +1,5 @@
+<%= form_with url: trades_path, method: :post, data: { turbo: false }, class: "flex items-center gap-2" do %>
+  <%= hidden_field_tag :symbol, stock.symbol %>
+  <%= number_field_tag :shares, 1, min: 1, class: "w-16 px-2 py-1 rounded-md bg-surface-3 border border-border text-font font-mono focus:outline-none focus:ring-2 focus:ring-primary" %>
+  <%= submit_tag "Buy", class: "px-4 py-2 rounded-lg cursor-pointer text-sm bg-green-800 hover:bg-green-900 text-white transition" %>
+<% end %>

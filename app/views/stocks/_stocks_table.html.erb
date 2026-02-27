@@ -1,0 +1,37 @@
+<%= turbo_frame_tag "stocks_table" do %>
+
+  <div class="overflow-hidden rounded-2xl border-border bg-surface shadow-lg ">
+    <table class="w-full text-left">
+
+      <thead class="bg-surface-2 text-muted uppercase text-xs">
+      <tr>
+        <th class="p-4">Symbol</th>
+        <th class="p-4">Name</th>
+        <th class="p-4">Price</th>
+        <th class="p-4">Watchlist</th>
+        <th class="p-4">Buy</th>
+      </tr>
+      </thead>
+      <tbody class="divide-y divide-border">
+      <% @stocks.each do |stock| %>
+        <tr class="hover:bg-surface-2 transition duration-200">
+          <td class="px-6 py-4 font-semibold text-primary hover:underline">
+            <%= link_to stock.symbol, stock_path(stock), data: { turbo: false } %>
+          </td>
+          <td class="px-6 py-4 text-font"><%= stock.name %></td>
+          <td class="px-6 py-4 font-mono text-notice" id="stock-price-<%= stock.id %>">
+            $<%= stock.current_price || "N/A" %>
+          </td>
+          <td class="px-6 py-4" id="watchlist-<%= stock.id %>">
+            <%= render "watchlists/button", stock: stock %>
+          </td>
+          <td class="px-6 py-4">
+
+            <%= render "trades/button", stock: stock %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

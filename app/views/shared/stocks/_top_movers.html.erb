@@ -1,31 +1,9 @@
-<%= turbo_frame_tag "top_movers" do %>
+<%= turbo_frame_tag "top_movers",
+                    src: top_movers_path,
+                    loading: :lazy do %>
 
-  <div class="bg-zinc-950 border-y border-zinc-800 overflow-hidden">
-    <div class="whitespace-nowrap animate-marquee flex gap-10 py-3">
-
-      <% 5.times do %> <!-- duplicate for seamless scroll -->
-        <% top_movers.each do |stock| %>
-          <% positive = stock[:percent_change] >= 0 %>
-
-          <div class="flex items-center gap-2 text-sm">
-            <!-- Symbol -->
-            <span class="font-semibold text-zinc-200">
-              <%= stock[:symbol] %>
-            </span>
-
-            <!-- Price -->
-            <span class="text-zinc-400">
-              <%= number_to_currency(stock[:price]) %>
-            </span>
-
-            <!-- Percent Change -->
-            <span class="<%= positive ? 'text-emerald-400' : 'text-red-400' %> font-medium">
-              <%= number_to_percentage(stock[:percent_change], precision: 2) %>
-            </span>
-          </div>
-        <% end %>
-      <% end %>
-
-    </div>
+  <div class="bg-zinc-950 border-y border-zinc-800 py-3 text-center text-zinc-500">
+    Loading market movers...
   </div>
+
 <% end %>
