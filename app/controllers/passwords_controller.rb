@@ -1,40 +1,39 @@
 class PasswordsController < ApplicationController
-	allow_unauthenticated_access
-	before_action :set_user_by_token, only: %i[ edit update ]
-	rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_password_path, alert: "Try again later." }
+  allow_unauthenticated_access
+  before_action :set_user_by_token, only: %i[ edit update ]
+  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_password_path, alert: "Try again later." }
 
-	def new
-	end
+  def new
+  end
 
-	def create
-		if (user = User.find_by(email_address: params[:email_address]))
-			PasswordsMailer.reset(user).deliver_later
-			redirect_to login_path, notice: "Password reset instructions sent."
-		else
-			flash.now[:alert] = "Email address not found"
-			render :new, status: :unprocessable_entity
-		end
+  def create
+    if (user = User.find_by(email_address: params[:email_address]))
+      PasswordsMailer.reset(user).deliver_later
+      redirect_to login_path, notice: "Password reset instructions sent."
+    else
+      flash.now[:alert] = "Email address not found"
+      render :new, status: :unprocessable_entity
+    end
+  end
 
-	end
+  def edit
+  end
 
-	def edit
-	end
+  def update
+    if @user.update(params.permit(:password, :password_confirmation))
+      @user.sessions.destroy_all
+      redirect_to login_path, notice: "Password has been reset."
+    else
+      flash.now[:alert] = @user.errors.full_messages.join(", ")
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
-	def update
-		if @user.update(params.permit(:password, :password_confirmation))
-			@user.sessions.destroy_all
-			redirect_to login_path, notice: "Password has been reset."
-		else
-			flash.now[:alert] = @user.errors.full_messages.join(", ")
-			render :edit, status: :unprocessable_entity
-		end
-	end
+  private
 
-	private
-
-	def set_user_by_token
-		@user = User.find_by_password_reset_token!(params[:token])
-	rescue ActiveSupport::MessageVerifier::InvalidSignature
-		redirect_to forgot_password_path, alert: "Password reset link is invalid or has expired."
-	end
+  def set_user_by_token
+    @user = User.find_by_password_reset_token!(params[:token])
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+    redirect_to forgot_password_path, alert: "Password reset link is invalid or has expired."
+  end
 end

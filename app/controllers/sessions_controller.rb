@@ -1,31 +1,30 @@
 class SessionsController < ApplicationController
-	allow_unauthenticated_access only: %i[ new create ]
-	before_action :redirect_if_authenticated, only: %i[ new create ]
+  allow_unauthenticated_access only: %i[ new create ]
+  before_action :redirect_if_authenticated, only: %i[ new create ]
 
-	rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to login_path, alert: "Try again later." }
+  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to login_path, alert: "Try again later." }
 
-	def new
+  def new
+  end
 
-	end
+  def create
+    if (user = User.authenticate_by_login(user_params[:login], user_params[:password]))
+      start_new_session_for user
+      redirect_to root_path, notice: "Logged in!"
+    else
+      flash.now[:alert] = "Invalid credentials"
+      render :new, status: :unprocessable_entity
+    end
+  end
 
-	def create
-		if (user = User.authenticate_by_login(user_params[:login], user_params[:password]))
-			start_new_session_for user
-			redirect_to root_path, notice: "Logged in!"
-		else
-			flash.now[:alert] = "Invalid credentials"
-			render :new, status: :unprocessable_entity
-		end
-	end
+  def destroy
+    terminate_session
+    redirect_to login_path, status: :see_other, notice: "You have been logged out."
+  end
 
-	def destroy
-		terminate_session
-		redirect_to login_path, status: :see_other, notice: "You have been logged out."
-	end
+  private
 
-	private
-
-	def user_params
-		params.permit(:login, :password)
-	end
+  def user_params
+    params.permit(:login, :password)
+  end
 end
