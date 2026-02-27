@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_24_134139) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_24_092018) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -31,15 +31,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_24_134139) do
     t.string "user_agent"
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
-  end
-
-  create_table "stock_snapshots", force: :cascade do |t|
-    t.datetime "captured_at"
-    t.datetime "created_at", null: false
-    t.decimal "price"
-    t.bigint "stock_id", null: false
-    t.datetime "updated_at", null: false
-    t.index ["stock_id"], name: "index_stock_snapshots_on_stock_id"
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -87,7 +78,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_24_134139) do
   add_foreign_key "holdings", "stocks"
   add_foreign_key "holdings", "users"
   add_foreign_key "sessions", "users"
-  add_foreign_key "stock_snapshots", "stocks"
   add_foreign_key "trades", "stocks"
   add_foreign_key "trades", "users"
   add_foreign_key "watchlists", "stocks"
