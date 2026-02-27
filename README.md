@@ -6,9 +6,19 @@
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 
-Trivio is a full-stack,stock trading/invesment application built with Ruby on Rails and Hotwire.
-Users can invest in real companies with live market data,without spending any money.
+Trivio is a full-stack, stock trading/investment application built with Ruby on Rails and Hotwire.
+Users can invest in real companies with live market data, without spending any money.
 **Trivio's** desing was inspired by [Robinhood's](https://robinhood.com/us/en/) web application.
+
+
+
+https://github.com/user-attachments/assets/ba9ee787-a773-4827-9eba-a7cdb4a8a242
+
+
+https://github.com/user-attachments/assets/7c243c7b-8c32-4b33-bdeb-eb9c48cdd333
+
+
+
 
 ## Features
 
