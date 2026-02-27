@@ -10,7 +10,7 @@
     </div>
     <div class="min-w-0">
       <p class="text-white font-semibold text-sm hover:underline ">
-        <%= link_to holding.stock.symbol, stock_path(holding.stock.id) %>
+        <%= link_to holding.stock.symbol, stock_path(holding.stock.id), data: { turbo: false } %>
       </p>
       <p class="text-white/40 text-xs"><%= holding.shares %> shares</p>
     </div>

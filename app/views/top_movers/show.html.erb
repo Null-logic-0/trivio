@@ -3,7 +3,7 @@
   <div class="bg-zinc-950 border-y border-zinc-800 overflow-hidden">
     <div class="whitespace-nowrap animate-marquee flex gap-10 py-3">
 
-      <% 5.times do %> <!-- duplicate for seamless scroll -->
+      <% 5.times do %>
         <% @top_movers.each do |stock| %>
           <% positive = stock[:percent_change] >= 0 %>
 

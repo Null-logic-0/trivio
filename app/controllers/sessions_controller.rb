@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 	def create
 		if (user = User.authenticate_by_login(user_params[:login], user_params[:password]))
 			start_new_session_for user
-			redirect_to after_authentication_url, notice: "Logged in!"
+			redirect_to root_path, notice: "Logged in!"
 		else
 			flash.now[:alert] = "Invalid credentials"
 			render :new, status: :unprocessable_entity

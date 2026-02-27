@@ -1,4 +1,5 @@
 class TopMoversController < ApplicationController
+	layout false
 
 	def show
 		@top_movers = Rails.cache.fetch("top_movers", expires_in: 5.minutes) do
