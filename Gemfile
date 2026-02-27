@@ -66,7 +66,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-gem "dotenv-rails", "~> 2.7"
+gem "dotenv-rails", "~> 3.2"
 gem "httparty"
 gem "sidekiq"
 gem "redis"
