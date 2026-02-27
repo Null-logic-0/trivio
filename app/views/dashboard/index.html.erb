@@ -1,22 +1,15 @@
-<div class="space-y-6">
-
-
-  <%= render "shared/user_header" %>
-
-  <%= render "portfolio_chart" %>
-
-  <div class="grid gird-cols-1 md:grid-cols-2 gap-6">
-
-    <%= render "portfolio" %>
-
-
-    <%= render "watchlist" %>
+<%= turbo_frame_tag "dashboard_content",
+                    src: dashboard_content_path,
+                    data: {
+                      controller: "auto_refresh",
+                      dashboard_interval_value: 10000
+                    } do %>
+  <div class="animate-pulse space-y-6" id="dashboard-skeleton">
+    <div class="bg-surface h-24 rounded-xl border border-white/5 shadow-2xl px-6 py-5"></div>
+    <div class="bg-surface h-74 rounded-xl border border-white/5 shadow-2xl px-6 py-5"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-surface h-54 rounded-xl border border-white/5 shadow-2xl px-6 py-5"></div>
+      <div class="bg-surface h-54 rounded-xl border border-white/5 shadow-2xl px-6 py-5"></div>
+    </div>
   </div>
-
-</div>
-
-
-
-
-
-
+<% end %>

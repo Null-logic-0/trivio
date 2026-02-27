@@ -1,6 +1,10 @@
 class DashboardController < ApplicationController
 	def index
 		@user = Current.user
+	end
+
+	def content
+		@user = Current.user
 		@holdings = @user.holdings.includes(:stock)
 		@range = params[:range] || "1d"
 
@@ -11,6 +15,8 @@ class DashboardController < ApplicationController
 		       when "3m" then 90
 		       when "1y" then 365
 		       when "all" then nil
+		       else
+			       1
 		       end
 
 		trades = @user.trades
@@ -23,6 +29,9 @@ class DashboardController < ApplicationController
 		@portfolio_value = values.sum
 		@daily_change = values.last.to_f - values[-2].to_f
 		@daily_change_percent = values[-2].to_f > 0 ? ((@daily_change / values[-2].to_f) * 100).round(2) : 0.0
+
+		render(partial: "dashboard/dashboard_content")
+
 	end
 
 	def portfolio_history_json

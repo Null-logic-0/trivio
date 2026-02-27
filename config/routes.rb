@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 	get "up" => "rails/health#show", as: :rails_health_check
 
 	root "dashboard#index"
+	get "dashboard/content", to: "dashboard#content", as: :dashboard_content
 	get "dashboard/portfolio_history", to: "dashboard#portfolio_history_json", as: :portfolio_history
 	get "dashboard/holdings", to: "dashboard#holdings_json", as: :holdings
 
